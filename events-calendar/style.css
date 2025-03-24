@@ -94,3 +94,8 @@ header,footer{
     flex-direction: column;
 }
 }
+/* Create */
+.required::after {
+    content: " *";
+    color: red;
+  }
