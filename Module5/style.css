@@ -33,7 +33,9 @@ header,footer{
     align-items: center;
     margin-bottom: 1rem;
 }
-/*Details Page*/
+
+
+/* Not being used */
 .event-header {
     text-align: center;
     margin-bottom: 2rem;
@@ -84,18 +86,62 @@ header,footer{
     font-size: 0.8rem;
     color: #6c757d;
 }
-.red{
-    border-color: #d0312d;
-    color: #d0312d;
+
+/* Edit/Delete Buttons */
+.event-actions a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+    margin-right: 1rem;
 }
+
+.event-actions a:hover {
+    background-color: #333;
+}
+
+.event-actions .edit {
+    background-color: #0077ff;
+}
+
+.event-actions .delete {
+    background-color: #e74c3c;
+}
+
+/* Comment Form */
+form {
+    margin-top: 1.5rem;
+    border-top: 1px solid #666;
+    padding-top: 1rem;
+}
+
+textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: #fff;
+}
+
+button {
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+button[disabled] {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
 /*For phones*/
 @media (max-width: 576px) {
 .event-actions {
     flex-direction: column;
 }
 }
-/* Create */
-.required::after {
-    content: " *";
-    color: red;
-  }

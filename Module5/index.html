@@ -1,19 +1,107 @@
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <title>Events Calendar</title>
+  
+  <title>Campus News</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
   <link rel="stylesheet" href="style.css">
   
 </head>
+
 <body>
   <main class="container">
     <header>
       <br>
-      <h1>Events Calendar</h1>
+      <h1>Campus News</h1>
     </header>
+
+    <!-- Search Bar -->
+    <section class="search-bar">
+      <div class="grid">
+        <div>
+		      <label for="search">Search News</label>
+          <input type="search" id="search" name="search" placeholder="Enter Your Search Term...">
+        </div>
+        <div class="grid">
+          <div>
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option value="">All Categories</option>
+              <option value="events">Events</option>
+              <option value="announcements">Announcements</option>
+              <option value="sports">Sports</option>
+              <option value="academics">Academics</option>
+            </select>
+          </div> 
+          <div>
+            <label for="time">Time</label>
+            <select id="date-range" name="date-range">
+              <option value="">Any Time</option>
+              <option value="24hours">Last 24 Hours</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add News (Button)-->
+    <button data-target="newsModal" onclick="document.getElementById('newsModal').showModal()">Add News</button>
+    <br> <br>
+
+    <!-- News Section -->
+    <section class="news-feed">
+      <h2>Latest News</h2>
+      <article>
+        <h3><a href="news.html">University Cultural Fest Announced</a></h3>
+        <p>The annual cultural fest will be held on April 15th. Registrations are now open!</p>
+        <small>Category: Events | Date: 2025-04-09</small>
+      </article>
+      
+
+      <article>
+        <h3><a href="news.html">New Library Hours Starting This Semester</a></h3>
+        <p>Library will now be open from 8 AM to 10 PM on weekdays.</p>
+        <small>Category: Announcements | Date: 2025-04-08</small>
+      </article>
+    </section>
+
+    <!-- Add News Modal -->
+    <dialog id="newsModal">
+      <article>
+        <header>
+          <h3>Add News</h3>
+        </header>
+        <form>
+          <label for="newsTitle">Title</label>
+          <input type="text" id="newsTitle" name="newsTitle" required>
+
+          <label for="newsContent">Content</label>
+          <textarea id="newsContent" name="newsContent" required></textarea>
+
+          <label for="newsCategory">Category</label>
+          <select id="newsCategory" name="newsCategory" required>
+            <option>Events</option>
+            <option>Announcements</option>
+            <option>Sports</option>
+            <option>Academics</option>
+          </select>
+
+          <label for="newsDate">Date</label>
+          <input type="date" id="newsDate" name="newsDate" required>
+
+          <footer>
+            <button type="submit" disabled>Submit</button>
+            <button type="button" class="secondary" onclick="document.getElementById('newsModal').close()">Cancel</button>
+          </footer>
+        </form>
+      </article>
+    </dialog>
+    
   </main>
 </body>
 </html>
