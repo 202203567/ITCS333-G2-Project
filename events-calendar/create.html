@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Create New Event</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <nav>
+      <ul>
+        <li><a href="index.html">&larr; Back to Events</a></li>
+      </ul>
+    </nav>
+    
+    <header>
+      <h1>Create New Event</h1>
+      <p>Fill out the form below to add a new event to the calendar</p>
+    </header>
+
+    <form>
+      <div class="grid">
+        <div>
+          <label class="required" for="event-title">Event Title</label>
+          <input type="text" id="event-title" name="event-title" placeholder="Title of the Event..." required>
+        </div>
+        
+        <div>
+          <label class="required" for="category">Category</label>
+          <select id="category" name="category" required>
+            <option value="" selected disabled>Select a category</option>
+            <option value="religious">Religious</option>
+            <option value="academic">Academic</option>
+            <option value="government">Government</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div>
+          <label class="required" for="event-date">Date</label>
+          <input type="date" id="event-date" name="event-date" required>
+        </div>
+        
+        <div>
+          <label class="required" for="start-time">Start Time</label>
+          <input type="time" id="start-time" name="start-time" required>
+        </div>
+        
+        <div>
+          <label class="required" for="end-time">End Time</label>
+          <input type="time" id="end-time" name="end-time" required>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div>
+          <label class="required" for="location">Location</label>
+          <input type="text" id="location" name="location" placeholder="Enter Event Location" required>
+        </div>
+        
+        <div>
+          <label class="required" for="invited">People Invited</label>
+          <input type="text" id="invited" name="invited" placeholder="Everyone, Students, Tutors, etc.." required>
+        </div>
+      </div>
+
+      <div>
+        <label class="required" for="about">About The Event</label>
+        <textarea id="about" name="about" placeholder="Provide details about the event..." rows="2" required></textarea>
+      </div>
+      <div>
+        <label for="expect">What to Expect (optional)</label>
+        <textarea id="expect" name="expect" placeholder="Provide details about what to expect from the event..." rows="2"></textarea>
+      </div>
+
+      <div class="grid">
+        <div>
+          <label for="contact-email">Contact Email (optional)</label>
+          <input type="email" id="contact-email" name="contact-email" placeholder="Enter Contact Email...">
+        </div>
+        
+        <div>
+          <label for="registration-link">Registration Link (optional)</label>
+          <input type="url" id="registration-link" name="registration-link" placeholder="https://forms.office.com/....">
+        </div>
+      </div>
+
+      <fieldset>
+        <legend>Event Settings</legend>
+        <label for="allow-comments">
+          <input type="checkbox" id="allow-comments" name="allow-comments" checked>
+          Allow comments
+        </label>
+      </fieldset>
+      <p><small>Fields marked with * are required.</small></p>
+      
+      <div class="event-actions">
+        <button class="outline">Create Event</button>
+        <a href="index.html" role="button" class="outline red">Cancel</a>
+      </div>
+    </form>
+    
+    <footer>
+      <small>MAHMOOD ALTHAWADI 202203567 G2</small>
+    </footer>
+  </main>
+</body>
+</html>

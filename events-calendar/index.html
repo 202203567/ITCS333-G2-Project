@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Events Calendar</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+  <main class="container">
+    <header>
+      <br>
+      <h1>Events Calendar</h1>
+    </header>
+
+    <section class="search-bar">
+      <div class="grid">
+        <div>
+		<label for="search">Search Events</label>
+          <input type="search" id="search" name="search" placeholder="Enter Your Search Term...">
+        </div>
+        <div class="grid">
+          <div>
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option value="">All Categories</option>
+              <option value="religious">Religious</option>
+              <option value="academic">Academic</option>
+              <option value="government">Government</option>
+            </select>
+          </div>
+          <div>
+            <label for="date-range">Date Range</label>
+            <select id="date-range" name="date-range">
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+              <option value="year" selected>This Year</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="controls">
+      <div class="sort-controls">
+        <label for="sort">Sort by:</label>
+        <select id="sort" name="sort">
+          <option value="asc">Earliest First</option>
+          <option value="desc">Latest First</option>
+        </select>
+      </div>
+      <div>
+        <a href="create.html" role="button">+ Add New Event</a>
+      </div>
+    </div>
+
+    <section class="events-list">
+      <article class="event-card">
+        <div class="event-date">Shawwal 1, 1446</div>
+        <h3>Eid al-Fitr Celebration</h3>
+        <p>Event Description</p>
+        <div>
+          <a href="details.html">View Details</a>
+        </div>
+      </article>
+
+      <article class="event-card">
+        <div class="event-date">Dhu al-Hijjah 10, 1446</div>
+        <h3>Eid al-Adha Celebration</h3>
+        <p>Event Description</p>
+        <div>
+          <a href="details.html">View Details</a>
+        </div>
+      </article>
+
+    </section>
+
+    <nav class="pagination">
+      <ul>
+        <li><a href="#"><</a></li>
+        <li><a href="#" aria-current="page">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">></a></li>
+      </ul>
+    </nav>
+    
+    <footer>
+      <small>MAHMOOD ALTHAWADI 202203567 G2</small>
+    </footer>
+  </main>
+</body>
+</html>
