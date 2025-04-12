@@ -34,6 +34,32 @@ header,footer{
     margin-bottom: 1rem;
 }
 
+/* Create HTML */
+
+    /* Show required asterisk */
+    label.required::after {
+        content: " *";
+        color: red;
+      }
+  
+      /* Optional preview card */
+      .preview-card {
+        display: block;
+        margin-top: 2rem;
+        padding: 1rem;
+        border-left: 4px solid #1095c1;
+        background-color: #2A2F3A;
+        border-radius: 8px;
+      }
+  
+      .success-msg {
+        background-color: #1c3c26;
+        color: #a1eaa4;
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 1rem;
+        display: none; /* Just a placeholder, for future logic */
+      }
 
 /* Not being used */
 .event-header {

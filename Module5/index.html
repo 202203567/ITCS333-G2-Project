@@ -50,57 +50,51 @@
     </section>
 
     <!-- Add News (Button)-->
-    <button data-target="newsModal" onclick="document.getElementById('newsModal').showModal()">Add News</button>
-    <br> <br>
+    <div class="controls">
+      <div class="sort-controls">
+        <label for="sort">Sort by:</label>
+        <select id="sort" name="sort">
+          <option value="asc">Earliest First</option>
+          <option value="desc">Latest First</option>
+        </select>
+      </div>
+      <div>
+        <a href="create.html" role="button">+ Add News</a>
+      </div>
+    </div>
 
     <!-- News Section -->
-    <section class="news-feed">
-      <h2>Latest News</h2>
-      <article>
-        <h3><a href="news.html">University Cultural Fest Announced</a></h3>
-        <p>The annual cultural fest will be held on April 15th. Registrations are now open!</p>
-        <small>Category: Events | Date: 2025-04-09</small>
+    <section class="events-list">
+      <article class="event-card">
+        <div class="event-date">Shawwal 1, 1446</div>
+        <h3>University Cultural Fest Announced</h3>
+        <p>Event Description</p>
+        <div>
+          <a href="details.html">View Details</a>
+        </div>
       </article>
-      
 
-      <article>
-        <h3><a href="news.html">New Library Hours Starting This Semester</a></h3>
-        <p>Library will now be open from 8 AM to 10 PM on weekdays.</p>
-        <small>Category: Announcements | Date: 2025-04-08</small>
+      <article class="event-card">
+        <div class="event-date">Dhu al-Hijjah 10, 1446</div>
+        <h3>New Library Hours Starting This Semester</h3>
+        <p>Event Description</p>
+        <div>
+          <a href="details.html">View Details</a>
+        </div>
       </article>
+
     </section>
 
-    <!-- Add News Modal -->
-    <dialog id="newsModal">
-      <article>
-        <header>
-          <h3>Add News</h3>
-        </header>
-        <form>
-          <label for="newsTitle">Title</label>
-          <input type="text" id="newsTitle" name="newsTitle" required>
+    <nav class="pagination">
+      <ul>
+        <li><a href="#"><</a></li>
+        <li><a href="#" aria-current="page">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">></a></li>
+      </ul>
+    </nav>
 
-          <label for="newsContent">Content</label>
-          <textarea id="newsContent" name="newsContent" required></textarea>
-
-          <label for="newsCategory">Category</label>
-          <select id="newsCategory" name="newsCategory" required>
-            <option>Events</option>
-            <option>Announcements</option>
-            <option>Sports</option>
-            <option>Academics</option>
-          </select>
-
-          <label for="newsDate">Date</label>
-          <input type="date" id="newsDate" name="newsDate" required>
-
-          <footer>
-            <button type="submit" disabled>Submit</button>
-            <button type="button" class="secondary" onclick="document.getElementById('newsModal').close()">Cancel</button>
-          </footer>
-        </form>
-      </article>
-    </dialog>
     
   </main>
 </body>
