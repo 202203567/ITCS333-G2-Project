@@ -1,0 +1,173 @@
+header,footer{
+	text-align: center;
+}
+/* Main Page */
+.event-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #1095c1;
+    background-color: #2A2F3A;
+}
+.event-date {
+    font-weight: bold;
+    color: #1095c1;
+}
+.search-bar {
+    background-color: #2A2F3A;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+}
+.pagination a {
+    margin: 0 0.25rem;
+}
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Create HTML */
+
+    /* Show required asterisk */
+    label.required::after {
+        content: " *";
+        color: red;
+      }
+  
+      /* Optional preview card */
+      .preview-card {
+        display: block;
+        margin-top: 2rem;
+        padding: 1rem;
+        border-left: 4px solid #1095c1;
+        background-color: #2A2F3A;
+        border-radius: 8px;
+      }
+  
+      .success-msg {
+        background-color: #1c3c26;
+        color: #a1eaa4;
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 1rem;
+        display: none; /* Just a placeholder, for future logic */
+      }
+
+/* Not being used */
+.event-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.event-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.meta-item svg {
+    width: 18px;
+    height: 18px;
+    fill: #1095c1;
+}
+.event-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+.event-description {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.comments-section {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #2A2F3A;
+}
+.comment {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    background-color: #2A2F3A;
+}
+.comment-author {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+.comment-date {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Edit/Delete Buttons */
+.event-actions a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+    margin-right: 1rem;
+}
+
+.event-actions a:hover {
+    background-color: #333;
+}
+
+.event-actions .edit {
+    background-color: #0077ff;
+}
+
+.event-actions .delete {
+    background-color: #e74c3c;
+}
+
+/* Comment Form */
+form {
+    margin-top: 1.5rem;
+    border-top: 1px solid #666;
+    padding-top: 1rem;
+}
+
+textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: #fff;
+}
+
+button {
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+button[disabled] {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+/*For phones*/
+@media (max-width: 576px) {
+.event-actions {
+    flex-direction: column;
+}
+}

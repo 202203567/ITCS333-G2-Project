@@ -1,0 +1,28 @@
+:root {
+    --primary-color: #2584ff;
+}
+
+.grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.comments-section {
+    border-top: 1px solid #eee;
+    padding-top: 2rem;
+    margin-top: 2rem;
+}
+
+.comment {
+    padding: 1rem;
+    background: #131313;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
