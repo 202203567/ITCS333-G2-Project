@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  
+  <title>Campus News</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+
+<body>
+  <main class="container">
+    <header>
+      <br>
+      <h1>Campus News</h1>
+    </header>
+
+    <!-- Search Bar -->
+    <section class="search-bar">
+      <div class="grid">
+        <div>
+		      <label for="search">Search News</label>
+          <input type="search" id="search" name="search" placeholder="Enter Your Search Term...">
+        </div>
+        <div class="grid">
+          <div>
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option value="">All Categories</option>
+              <option value="events">Events</option>
+              <option value="announcements">Announcements</option>
+              <option value="sports">Sports</option>
+              <option value="academics">Academics</option>
+            </select>
+          </div> 
+          <div>
+            <label for="time">Time</label>
+            <select id="date-range" name="date-range">
+              <option value="">Any Time</option>
+              <option value="24hours">Last 24 Hours</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add News (Button)-->
+    <div class="controls">
+      <div class="sort-controls">
+        <label for="sort">Sort by:</label>
+        <select id="sort" name="sort">
+          <option value="asc">Earliest First</option>
+          <option value="desc">Latest First</option>
+        </select>
+      </div>
+      <div>
+        <a href="create.html" role="button">+ Add News</a>
+      </div>
+    </div>
+
+    <!-- News Section -->
+    <section class="events-list">
+      <article class="event-card">
+        <div class="event-date">Shawwal 1, 1446</div>
+        <h3>University Cultural Fest Announced</h3>
+        <p>Event Description</p>
+        <div>
+          <a href="details.html">View Details</a>
+        </div>
+      </article>
+
+      <article class="event-card">
+        <div class="event-date">Dhu al-Hijjah 10, 1446</div>
+        <h3>New Library Hours Starting This Semester</h3>
+        <p>Event Description</p>
+        <div>
+          <a href="details.html">View Details</a>
+        </div>
+      </article>
+
+    </section>
+
+    <nav class="pagination">
+      <ul>
+        <li><a href="#"><</a></li>
+        <li><a href="#" aria-current="page">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">></a></li>
+      </ul>
+    </nav>
+
+    
+  </main>
+</body>
+</html>

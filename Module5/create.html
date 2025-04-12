@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Create New Event</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <main class="container">
+    <nav>
+      <ul>
+        <li><a href="index.html">&larr; Back to Events</a></li>
+      </ul>
+    </nav>
+
+    <header>
+      <h1>Add News</h1>
+      <p>Fill out the form below to add a new headline to the calendar.</p>
+    </header>
+
+    <!-- Success Message -->
+    <div class="success-msg">
+      ✅ News created successfully!
+    </div>
+
+    <form>
+      <div class="grid">
+        <div>
+          <label class="required" for="event-title">News Headline</label>
+          <input type="text" id="event-title" name="event-title" placeholder="News Headline..." required>
+        </div>
+        <div>
+          <label class="required" for="category">Category</label>
+          <select id="category" name="category" required>
+            <option value="" selected disabled>Select a category</option>
+            <option value="events">Events</option>
+            <option value="announcements">Announcements</option>
+            <option value="sports">Sports</option>
+            <option value="academics">Academics</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div>
+          <label class="required" for="event-date">Date</label>
+          <input type="date" id="event-date" name="event-date" required>
+        </div>
+        <div>
+          <label class="required" for="start-time">Start Time</label>
+          <input type="time" id="start-time" name="start-time" required>
+        </div>
+        <div>
+          <label class="required" for="end-time">End Time</label>
+          <input type="time" id="end-time" name="end-time" required>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div>
+          <label for="location">Location (optional)</label>
+          <input type="text" id="location" name="location" placeholder="Event location...">
+        </div>
+        <div>
+          <label for="contact-email">Contact Email (optional)</label>
+          <input type="email" id="contact-email" name="contact-email" placeholder="Enter Contact Email...">
+        </div>
+      </div>
+
+      <div>
+        <label class="required" for="about">News Description</label>
+        <textarea id="about" name="about" placeholder="Provide details about the headline..." rows="3" required></textarea>
+      </div>
+
+      <fieldset>
+        <legend>Event Settings</legend>
+        <label for="allow-comments">
+          <input type="checkbox" id="allow-comments" name="allow-comments" checked>
+          Allow comments
+        </label>
+      </fieldset>
+
+      <p><small>Fields marked with * are required.</small></p>
+
+      <div class="event-actions">
+        <button class="outline" type="submit">Create New Headline</button>
+        <a href="index.html" role="button" class="outline red">Cancel</a>
+      </div>
+    </form>
+
+  </main>
+</body>
+</html>
