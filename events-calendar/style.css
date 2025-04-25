@@ -1,7 +1,6 @@
 header,footer{
 	text-align: center;
 }
-/* Main Page */
 .event-card {
     margin-bottom: 1rem;
     padding: 1rem;
@@ -33,7 +32,6 @@ header,footer{
     align-items: center;
     margin-bottom: 1rem;
 }
-/*Details Page*/
 .event-header {
     text-align: center;
     margin-bottom: 2rem;
@@ -94,8 +92,43 @@ header,footer{
     flex-direction: column;
 }
 }
-/* Create */
 .required::after {
     content: " *";
     color: red;
-  }
+}
+.loading-indicator {
+    text-align: center;
+    padding: 2rem;
+}
+.error-message {
+    color: #d0312d;
+    text-align: center;
+    padding: 1rem;
+}
+.no-events {
+    text-align: center;
+    padding: 2rem;
+}
+.is-invalid {
+    border-color: #d0312d;
+}
+.error-message {
+    color: #d0312d;
+}
+.success-message {
+    background-color: #1c7c4e;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+.no-comments {
+    text-align: center;
+    padding: 1rem;
+    background-color: #2A2F3A;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+.loading-hidden {
+    display: none;
+}
