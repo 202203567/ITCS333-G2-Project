@@ -1,1 +1,140 @@
-
+[
+    {
+        "id": 1,
+        "title": "Software Development Basics",
+        "body": "Introduction to HTML and CSS",
+        "category": "CS",
+        "createdAt": "2024-12-04",
+        "comments": [
+            {
+                "id": 101,
+                "text": "This was really helpful for beginners!",
+                "author": "Sarah",
+                "date": "2024-12-05"
+            },
+            {
+                "id": 102,
+                "text": "Could you add more examples about CSS Grid?",
+                "author": "Ahmed",
+                "date": "2024-12-06"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Data Structures",
+        "body": "Understanding arrays, linked lists, and trees",
+        "category": "CS",
+        "createdAt": "2024-12-05",
+        "comments": [
+            {
+                "id": 201,
+                "text": "The explanation about trees was excellent!",
+                "author": "Michael",
+                "date": "2024-12-07"
+            },
+            {
+                "id": 202,
+                "text": "I found the linked list section a bit confusing. Could you clarify?",
+                "author": "Fatima",
+                "date": "2024-12-08"
+            },
+            {
+                "id": 203,
+                "text": "Great examples with practical applications.",
+                "author": "David",
+                "date": "2024-12-10"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Database Management",
+        "body": "Introduction to SQL and NoSQL databases",
+        "category": "IT",
+        "createdAt": "2024-12-06",
+        "comments": [
+            {
+                "id": 301,
+                "text": "Very comprehensive overview of both SQL and NoSQL.",
+                "author": "Layla",
+                "date": "2024-12-08"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Web Development",
+        "body": "Building responsive websites with HTML, CSS, and JavaScript",
+        "category": "IT",
+        "createdAt": "2024-12-07",
+        "comments": [
+            {
+                "id": 401,
+                "text": "The responsive design section was particularly helpful!",
+                "author": "Omar",
+                "date": "2024-12-09"
+            },
+            {
+                "id": 402,
+                "text": "Would love to see more about JavaScript frameworks.",
+                "author": "Jessica",
+                "date": "2024-12-11"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "title": "Mathematics for Computer Science",
+        "body": "Discrete mathematics and its applications",
+        "category": "Mathematics",
+        "createdAt": "2024-12-08",
+        "comments": [
+            {
+                "id": 501,
+                "text": "The graph theory explanation really helped me understand algorithms better.",
+                "author": "Hassan",
+                "date": "2024-12-10"
+            },
+            {
+                "id": 502,
+                "text": "Could you add more on probability theory?",
+                "author": "Sophia",
+                "date": "2024-12-12"
+            },
+            {
+                "id": 503,
+                "text": "Great connection between math concepts and practical programming examples.",
+                "author": "Ali",
+                "date": "2024-12-15"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "title": "Mathematics for Computer Science 2",
+        "body": "Discrete mathematics and its applications",
+        "category": "Mathematics",
+        "createdAt": "2024-12-08",
+        "comments": [
+            {
+                "id": 601,
+                "text": "The graph theory explanation really helped me understand algorithms better.",
+                "author": "Hassan",
+                "date": "2024-12-10"
+            },
+            {
+                "id": 602,
+                "text": "Could you add more on probability theory?",
+                "author": "Sophia",
+                "date": "2024-12-12"
+            },
+            {
+                "id": 603,
+                "text": "Great connection between math concepts and practical programming examples.",
+                "author": "Ali",
+                "date": "2024-12-15"
+            }
+        ]
+    }
+]
