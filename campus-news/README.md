@@ -10,3 +10,5 @@ Links open pages
 Option 2:
 News is compressed into a photo, title and paragraph
 
+Phase 2:
+NOTE: Please open index.html using Live Server extension
