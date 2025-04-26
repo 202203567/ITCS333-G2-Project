@@ -1,0 +1,31 @@
+[
+   {
+     "id": 1,
+     "title": "University Cultural Fest Announced",
+     "description": "The university will host a cultural festival with food, performances, and activities from around the world. All students and faculty are invited.",
+     "date": "2025-04-10",
+     "category": "events"
+   },
+   {
+     "id": 2,
+     "title": "New Library Hours Starting This Semester",
+     "description": "The library will now open at 8 AM and close at 10 PM every weekday. Weekend hours remain unchanged.",
+     "date": "2025-04-15",
+     "category": "announcements"
+   },
+   {
+     "id": 3,
+     "title": "Inter-College Football Tournament",
+     "description": "Our campus team will participate in the upcoming tournament. Matches start next week at the Main Stadium.",
+     "date": "2025-04-20",
+     "category": "sports"
+   },
+   {
+     "id": 4,
+     "title": "Midterm Exam Schedule Released",
+     "description": "Midterm exams for all departments have been announced. Students can check the academic portal for detailed schedules.",
+     "date": "2025-04-18",
+     "category": "academics"
+   }
+ ]
+ 
