@@ -113,27 +113,27 @@
     {
         "id": 6,
         "title": "Mathematics for Computer Science 2",
-        "body": "Discrete mathematics and its applications",
+        "body": "Advanced topics in mathematical reasoning and computational theory",
         "category": "Mathematics",
-        "createdAt": "2024-12-08",
+        "createdAt": "2024-12-15",
         "comments": [
             {
                 "id": 601,
-                "text": "The graph theory explanation really helped me understand algorithms better.",
-                "author": "Hassan",
-                "date": "2024-12-10"
+                "text": "The section on cryptography mathematics was incredibly practical!",
+                "author": "Fatima",
+                "date": "2024-12-18"
             },
             {
                 "id": 602,
-                "text": "Could you add more on probability theory?",
-                "author": "Sophia",
-                "date": "2024-12-12"
+                "text": "Would love more examples connecting calculus to machine learning algorithms.",
+                "author": "Ibrahim",
+                "date": "2024-12-20"
             },
             {
                 "id": 603,
-                "text": "Great connection between math concepts and practical programming examples.",
-                "author": "Ali",
-                "date": "2024-12-15"
+                "text": "The linear algebra applications were very helpful for my graphics programming project.",
+                "author": "Zainab",
+                "date": "2024-12-22"
             }
         ]
     }
