@@ -18,14 +18,14 @@
     
     <header>
       <h1>Create New Event</h1>
-      <p>Fill out the form below to add a new event to the calendar</p>
+      <p id="form-description">Fill out the form below to add a new event to the calendar</p>
     </header>
 
-    <form>
+    <form id="create-event-form">
       <div class="grid">
         <div>
-          <label class="required" for="event-title">Event Title</label>
-          <input type="text" id="event-title" name="event-title" placeholder="Title of the Event..." required>
+          <label class="required" for="title">Event Title</label>
+          <input type="text" id="title" name="title" placeholder="Title of the Event..." required>
         </div>
         
         <div>
@@ -41,18 +41,18 @@
 
       <div class="grid">
         <div>
-          <label class="required" for="event-date">Date</label>
-          <input type="date" id="event-date" name="event-date" required>
+          <label class="required" for="date">Date</label>
+          <input type="date" id="date" name="date" required>
         </div>
         
         <div>
-          <label class="required" for="start-time">Start Time</label>
-          <input type="time" id="start-time" name="start-time" required>
+          <label class="required" for="startTime">Start Time</label>
+          <input type="time" id="startTime" name="startTime" required>
         </div>
         
         <div>
-          <label class="required" for="end-time">End Time</label>
-          <input type="time" id="end-time" name="end-time" required>
+          <label class="required" for="endTime">End Time</label>
+          <input type="time" id="endTime" name="endTime" required>
         </div>
       </div>
 
@@ -69,37 +69,32 @@
       </div>
 
       <div>
-        <label class="required" for="about">About The Event</label>
-        <textarea id="about" name="about" placeholder="Provide details about the event..." rows="2" required></textarea>
+        <label class="required" for="description">About The Event</label>
+        <textarea id="description" name="description" placeholder="Provide details about the event..." rows="2" required></textarea>
       </div>
       <div>
-        <label for="expect">What to Expect (optional)</label>
-        <textarea id="expect" name="expect" placeholder="Provide details about what to expect from the event..." rows="2"></textarea>
+        <label for="expectations">What to Expect (optional)</label>
+        <textarea id="expectations" name="expectations" placeholder="Provide details about what to expect from the event..." rows="2"></textarea>
       </div>
 
       <div class="grid">
         <div>
-          <label for="contact-email">Contact Email (optional)</label>
-          <input type="email" id="contact-email" name="contact-email" placeholder="Enter Contact Email...">
+          <label for="contactEmail">Contact Email (optional)</label>
+          <input type="email" id="contactEmail" name="contactEmail" placeholder="Enter Contact Email...">
         </div>
         
         <div>
-          <label for="registration-link">Registration Link (optional)</label>
-          <input type="url" id="registration-link" name="registration-link" placeholder="https://forms.office.com/....">
+          <label for="registrationLink">Registration Link (optional)</label>
+          <input type="url" id="registrationLink" name="registrationLink" placeholder="https://forms.office.com/....">
         </div>
       </div>
-
-      <fieldset>
-        <legend>Event Settings</legend>
-        <label for="allow-comments">
-          <input type="checkbox" id="allow-comments" name="allow-comments" checked>
-          Allow comments
-        </label>
-      </fieldset>
+      
       <p><small>Fields marked with * are required.</small></p>
       
+      <div id="form-messages"></div>
+      
       <div class="event-actions">
-        <button class="outline">Create Event</button>
+        <button type="submit" class="outline">Create Event</button>
         <a href="index.html" role="button" class="outline red">Cancel</a>
       </div>
     </form>

@@ -59,6 +59,18 @@ header,footer{
     gap: 1rem;
     margin: 2rem 0;
 }
+.event-actions button, 
+.event-actions a[role="button"] {
+    width: auto;
+    min-width: 120px;
+    height: 70px;
+    line-height: 1.5;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .event-description {
     text-align: center;
     margin-bottom: 2rem;
