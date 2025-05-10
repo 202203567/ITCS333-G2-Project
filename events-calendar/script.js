@@ -5,7 +5,7 @@ const dateRangeSelect = document.getElementById('date-range');
 const sortSelect = document.getElementById('sort');
 const paginationElement = document.querySelector('.pagination ul');
 const eventsPerPage = 4;
-const API_URL = "https://api.null.bh/"
+const API_URL = "https://ce1e4852-9e1a-4d4d-8cd7-6a7524b7b7dc-00-3he6dfxbqutl3.pike.replit.dev/"
 
 let events = [];          // Stores all events from API
 let filteredEvents = [];  // Stores filtered events based on search/filter criteria
