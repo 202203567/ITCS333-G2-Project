@@ -1,66 +1,135 @@
 // Global variables
 let notes = [];
 let currentPage = 1;
-const notesPerPage = 5; // Number of notes per page
+const notesPerPage = 3; // Number of notes per page
 let filteredNotes = []; // Store filtered notes
+const API_BASE_URL = '/api.php'; // Base URL for API endpoints
 
+// Fetch notes from the API
 async function fetchNotes() {
     const notesContainer = document.querySelector('.grid');
     notesContainer.innerHTML = '<p>Loading...</p>'; // Show loading state
-
+    
     try {
-        const response = await fetch('notes.json');
+        // Use the simplified API structure
+        const response = await fetch(`${API_BASE_URL}?action=notes&page=${currentPage}&per_page=${notesPerPage}`);
+        
         if (!response.ok) throw new Error('Failed to fetch notes');
-        notes = await response.json(); // Store notes in the global array
+        
+        const data = await response.json(); // Parse JSON response
+        notes = data.data; // Store notes in the global array
         filteredNotes = [...notes]; // Initialize filtered notes with all notes
         
-        // Render notes with pagination
-        renderNotes(paginateNotes(filteredNotes, currentPage));
-        renderPagination();
+        // Render notes
+        renderNotes(notes);
+        
+        // Render pagination based on API pagination data
+        renderPagination(data.pagination);
     } catch (error) {
         console.error('Error fetching notes:', error);
         notesContainer.innerHTML = `<p>Error: ${error.message}</p>`;
     }
 }
 
+// Fetch notes with filters
+async function fetchFilteredNotes(params = {}) {
+    const notesContainer = document.querySelector('.grid');
+    notesContainer.innerHTML = '<p>Loading...</p>'; // Show loading state
+    
+    try {
+        // Always include action=notes
+        params.action = 'notes';
+        
+        // Build query string from params
+        const queryString = Object.keys(params)
+            .filter(key => params[key] !== undefined && params[key] !== '') // Skip empty params
+            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+            .join('&');
+        
+        const url = `${API_BASE_URL}?${queryString}`;
+        const response = await fetch(url);
+        
+        if (!response.ok) throw new Error('Failed to fetch notes');
+        
+        const data = await response.json();
+        notes = data.data;
+        filteredNotes = [...notes];
+        
+        renderNotes(notes);
+        renderPagination(data.pagination);
+    } catch (error) {
+        console.error('Error fetching filtered notes:', error);
+        notesContainer.innerHTML = `<p>Error: ${error.message}</p>`;
+    }
+}
+
+// Render notes
 function renderNotes(notesToRender) {
     const notesContainer = document.querySelector('.grid');
     notesContainer.innerHTML = ''; // Clear loading state
-
+    
     if (notesToRender.length === 0) {
         notesContainer.innerHTML = '<p>No notes found</p>';
         return;
     }
-
+    
     notesToRender.forEach(note => {
         const noteElement = document.createElement('article');
         noteElement.innerHTML = `
             <h3>${note.title}</h3>
-            <p>${note.body}</p>
+            <p>${note.content.substring(0, 100)}${note.content.length > 100 ? '...' : ''}</p>
             <footer>
-                <small>${note.category} • Last updated: ${note.createdAt} • ${note.comments ? note.comments.length : 0} comments</small>
-                <a href="#detail" role="button" class="outline" data-id="${note.id}">View</a>
+                <small>${note.category} • Last updated: ${note.updated_at || note.created_at} • ${note.comment_count || 0} comments</small>
+                <a href="details.html?id=${note.id}" role="button" class="outline">View</a>
             </footer>
         `;
         notesContainer.appendChild(noteElement);
     });
 }
 
-function paginateNotes(notesArray, page) {
-    const start = (page - 1) * notesPerPage;
-    return notesArray.slice(start, start + notesPerPage);
-}
-
-function renderPagination() {
-    const totalPages = Math.ceil(filteredNotes.length / notesPerPage);
+// Render pagination based on API pagination data
+function renderPagination(pagination) {
     const paginationContainer = document.querySelector('nav ul');
     paginationContainer.innerHTML = '';
-
+    
+    if (!pagination) return;
+    
+    const totalPages = pagination.last_page;
+    currentPage = pagination.current_page;
+    
     for (let i = 1; i <= totalPages; i++) {
         const pageItem = document.createElement('li');
         const isCurrentPage = i === currentPage;
         pageItem.innerHTML = `<a href="#" data-page="${i}" ${isCurrentPage ? 'aria-current="page"' : ''}>${i}</a>`;
         paginationContainer.appendChild(pageItem);
+    }
+}
+
+// Fetch categories for dropdown
+async function fetchCategories() {
+    try {
+        const response = await fetch(`${API_BASE_URL}?action=categories`);
+        if (!response.ok) throw new Error('Failed to fetch categories');
+        
+        const data = await response.json();
+        const categories = data.data;
+        
+        // Populate category dropdown
+        const filterCategorySelect = document.querySelectorAll('.filters select')[0];
+        
+        // Then add categories from API
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            
+            // Add to filter dropdown if it doesn't already have this option
+            if (!Array.from(filterCategorySelect.options).some(opt => opt.value === category)) {
+                filterCategorySelect.appendChild(option);
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching categories:', error);
     }
 }
 
@@ -71,17 +140,16 @@ document.querySelector('input[type="search"]').addEventListener('input', functio
     // Reset to first page when searching
     currentPage = 1;
     
-    if (searchTerm === '') {
-        filteredNotes = [...notes]; // Reset to all notes
-    } else {
-        filteredNotes = notes.filter(note => 
-            note.title.toLowerCase().includes(searchTerm) || 
-            note.body.toLowerCase().includes(searchTerm)
-        );
-    }
-    
-    renderNotes(paginateNotes(filteredNotes, currentPage));
-    renderPagination();
+    // Use API for search instead of client-side filtering
+    fetchFilteredNotes({
+        search: searchTerm,
+        page: currentPage,
+        per_page: notesPerPage,
+        category: document.querySelectorAll('.filters select')[0].value !== 'All Categories' 
+            ? document.querySelectorAll('.filters select')[0].value 
+            : '',
+        sort: getSortValue(document.querySelectorAll('.filters select')[1].value)
+    });
 });
 
 // Category filtering functionality
@@ -91,183 +159,80 @@ document.querySelectorAll('.filters select')[0].addEventListener('change', funct
     // Reset to first page when filtering
     currentPage = 1;
     
-    if (selectedCategory === 'All Categories') {
-        filteredNotes = [...notes]; // Reset to all notes
-    } else {
-        // Map dropdown options to data categories
-        let categoryToFilter;
-        if (selectedCategory === 'Information Technology') {
-            categoryToFilter = 'IT';
-        } else if (selectedCategory === 'Mathematics') {
-            categoryToFilter = 'Mathematics';
-        } else {
-            categoryToFilter = selectedCategory;
-        }
-        
-        filteredNotes = notes.filter(note => note.category === categoryToFilter);
-    }
-    
-    renderNotes(paginateNotes(filteredNotes, currentPage));
-    renderPagination();
+    // Use API for filtering
+    fetchFilteredNotes({
+        category: selectedCategory !== 'All Categories' ? selectedCategory : '',
+        page: currentPage,
+        per_page: notesPerPage,
+        search: document.querySelector('input[type="search"]').value,
+        sort: getSortValue(document.querySelectorAll('.filters select')[1].value)
+    });
 });
 
 // Sort functionality
 document.querySelectorAll('.filters select')[1].addEventListener('change', function(e) {
-    const sortBy = e.target.value;
+    const sortValue = e.target.value;
     
-    if (sortBy === 'Sort by Title') {
-        filteredNotes.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sortBy === 'Sort by Date') {
-        filteredNotes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    }
-    
-    renderNotes(paginateNotes(filteredNotes, currentPage));
-});
-
-// Form submit
-document.querySelector('form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const title = document.getElementById('title').value.trim();
-    const content = document.getElementById('content').value.trim();
-    const category = document.getElementById('category').value;
-
-    if (!title || !content || !category) {
-        alert('All fields are required!');
-        return;
-    }
-
-    // Create new note object
-    const newNote = {
-        id: notes.length + 1,
-        title: title,
-        body: content,
-        category: category,
-        createdAt: new Date().toISOString().split('T')[0],
-        comments: [] // Initialize empty comments array
-    };
-    
-    // Add to notes array
-    notes.push(newNote);
-    filteredNotes = [...notes];
-    
-    // Update display
-    renderNotes(paginateNotes(filteredNotes, currentPage));
-    renderPagination();
-    
-    alert('Note created successfully!');
-    e.target.reset();
-});
-
-// Note detail view
-document.querySelector('.grid').addEventListener('click', function(e) {
-    if (e.target.tagName === 'A' && e.target.classList.contains('outline')) {
-        const noteId = parseInt(e.target.dataset.id);
-        const note = notes.find(n => n.id === noteId);
-        
-        if (note) {
-            const detailSection = document.querySelector('#detail');
-            detailSection.querySelector('h2').textContent = note.title;
-            detailSection.querySelector('p:nth-of-type(1) strong').nextSibling.textContent = ` ${note.category}`;
-            detailSection.querySelector('p:nth-of-type(2) strong').nextSibling.textContent = ` ${note.createdAt}`;
-            detailSection.querySelector('.content').innerHTML = `<p>${note.body}</p>`;
-            
-            // Render comments
-            renderComments(note);
-            
-            // Make sure to navigate to the detail section
-            window.location.hash = 'detail';
-        }
-    }
-});
-
-// Render comments for a note
-function renderComments(note) {
-    const commentsSection = document.querySelector('.comments-section');
-    const commentsContainer = document.createElement('div');
-    
-    // Update comments heading
-    const commentsHeading = commentsSection.querySelector('h3');
-    commentsHeading.textContent = `Comments (${note.comments ? note.comments.length : 0})`;
-    
-    // Clear existing comments (except the heading and form)
-    const existingComments = commentsSection.querySelectorAll('.comment');
-    existingComments.forEach(comment => comment.remove());
-    
-    // Add new comments
-    if (note.comments && note.comments.length > 0) {
-        note.comments.forEach(comment => {
-            const commentElement = document.createElement('div');
-            commentElement.className = 'comment';
-            commentElement.innerHTML = `
-                <p>${comment.text}</p>
-                <small>Posted by ${comment.author} • ${comment.date}</small>
-            `;
-            commentsSection.insertBefore(commentElement, commentsSection.querySelector('form'));
-        });
-    } else {
-        const noCommentsElement = document.createElement('div');
-        noCommentsElement.className = 'comment';
-        noCommentsElement.innerHTML = `<p>No comments yet. Be the first to comment!</p>`;
-        commentsSection.insertBefore(noCommentsElement, commentsSection.querySelector('form'));
-    }
-    
-    // Set up comment form submission
-    setupCommentForm(note);
-}
-
-// Set up comment form submission
-function setupCommentForm(note) {
-    const commentForm = document.querySelector('.comments-section form');
-    
-    // Remove any existing event listeners
-    const newCommentForm = commentForm.cloneNode(true);
-    commentForm.parentNode.replaceChild(newCommentForm, commentForm);
-    
-    // Add new event listener
-    newCommentForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const commentText = document.getElementById('comment').value.trim();
-        if (!commentText) {
-            alert('Please write a comment before posting.');
-            return;
-        }
-        
-        // Create new comment
-        const newComment = {
-            id: note.comments ? note.comments.length + 1 : 1,
-            text: commentText,
-            author: 'Anonymous User', // You could add a name field or use a stored username
-            date: new Date().toISOString().split('T')[0]
-        };
-        
-        // Add comment to note
-        if (!note.comments) {
-            note.comments = [];
-        }
-        note.comments.push(newComment);
-        
-        // Re-render comments
-        renderComments(note);
-        
-        // Clear form
-        e.target.reset();
-        
-        // Update note listing to show updated comment count
-        renderNotes(paginateNotes(filteredNotes, currentPage));
+    // Use API for sorting
+    fetchFilteredNotes({
+        sort: getSortValue(sortValue),
+        page: currentPage,
+        per_page: notesPerPage,
+        search: document.querySelector('input[type="search"]').value,
+        category: document.querySelectorAll('.filters select')[0].value !== 'All Categories' 
+            ? document.querySelectorAll('.filters select')[0].value 
+            : ''
     });
+});
+
+// Helper function to get sort value
+function getSortValue(sortOption) {
+    switch(sortOption) {
+        case 'Sort by Title':
+            return 'title';
+        case 'Sort by Date (Newest First)':
+            return 'date-desc'; // Newest first means descending order (newest at top)
+        case 'Sort by Date (Oldest First)':
+            return 'date-asc'; // Oldest first means ascending order (oldest at top)
+        default:
+            return 'date-desc'; // Default to newest first
+    }
 }
 
 // Pagination click handler
 document.querySelector('nav ul').addEventListener('click', function(e) {
     if (e.target.tagName === 'A' && e.target.dataset.page) {
         e.preventDefault();
+        
+        // Immediately scroll to top first, before any loading happens
+        window.scrollTo(0, 0);
+        
+        // Then update page and fetch new data
         currentPage = parseInt(e.target.dataset.page);
-        renderNotes(paginateNotes(filteredNotes, currentPage));
-        renderPagination();
+        
+        // Fetch notes for the selected page
+        fetchFilteredNotes({
+            page: currentPage,
+            per_page: notesPerPage,
+            search: document.querySelector('input[type="search"]').value,
+            category: document.querySelectorAll('.filters select')[0].value !== 'All Categories' 
+                ? document.querySelectorAll('.filters select')[0].value 
+                : '',
+            sort: getSortValue(document.querySelectorAll('.filters select')[1].value)
+        });
     }
 });
 
-// Call fetchNotes on page load
-document.addEventListener('DOMContentLoaded', fetchNotes);
+// Initialize application
+document.addEventListener('DOMContentLoaded', function() {
+    // Update the sort dropdown to include date options with clearer labels
+    const sortDropdown = document.querySelectorAll('.filters select')[1];
+    sortDropdown.innerHTML = `
+        <option>Sort by Date (Newest First)</option>
+        <option>Sort by Date (Oldest First)</option>
+        <option>Sort by Title</option>
+    `;
+    
+    fetchNotes();
+    fetchCategories();
+});
