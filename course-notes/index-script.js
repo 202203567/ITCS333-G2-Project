@@ -3,7 +3,7 @@ let notes = [];
 let currentPage = 1;
 const notesPerPage = 3; // Number of notes per page
 let filteredNotes = []; // Store filtered notes
-const API_BASE_URL = '/api.php'; // Base URL for API endpoints
+const API_BASE_URL = 'https://92eef556-e4be-48c7-88f5-70d60317f8c2-00-t0vvpa972dyq.pike.replit.dev/API.php'; // Base URL for API endpoints
 
 // Fetch notes from the API
 async function fetchNotes() {
