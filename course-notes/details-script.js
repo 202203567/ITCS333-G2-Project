@@ -1,5 +1,5 @@
 // Global variables
-const API_BASE_URL = '/api.php'; // Base URL for API endpoints
+const API_BASE_URL = 'https://92eef556-e4be-48c7-88f5-70d60317f8c2-00-t0vvpa972dyq.pike.replit.dev/API.php'; // Base URL for API endpoints
 let currentNoteId = null;
 
 // Helper function to get URL parameters
