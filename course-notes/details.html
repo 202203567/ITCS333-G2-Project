@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme='dark'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITCS333 Project - Note Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+</head>
+<body>
+    <header class="container">
+        <h1>Note Details</h1>
+        <nav>
+            <a href="index.html" role="button" class="secondary">Back to Notes</a>
+        </nav>
+    </header>
+
+    <!-- Item Detail View -->
+    <section id="detail" class="container">
+        <article>
+            <h2>Note Title</h2>
+            <p><strong>Category:</strong> </p>
+            <p><strong>Created:</strong> </p>
+            <div class="content">
+                <!-- Note content will be loaded dynamically -->
+            </div>
+
+            <div class="grid">
+                <a href="index.html" role="button" class="secondary">Back to List</a>
+                <div>
+                    <button class="submit">Edit</button>
+                    <button class="contrast">Delete</button>
+                </div>
+            </div>
+
+            <div class="comments-section">
+                <h3>Comments</h3>
+                <!-- Comments will be loaded dynamically -->
+                
+                <form>
+                    <label for="comment">
+                        Add Comment
+                        <textarea id="comment" placeholder="Write your comment..."></textarea>
+                    </label>
+                    <button type="submit">Post Comment</button>
+                </form>
+            </div>
+        </article>
+    </section>
+
+    <footer class="container">
+        <small>© ITCS333 Project</small>
+    </footer>
+    <script src="details-script.js"></script>
+</body>
+</html>

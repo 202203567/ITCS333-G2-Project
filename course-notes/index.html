@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme='dark'>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITCS333 Project Course Notes </title>
+    <title>ITCS333 Project Course Notes</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <link rel="stylesheet" href="index.css">
-        
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
 </head>
 <body>
     <!-- Main Listing Page -->
-    <header class="container">
+    <header class="container" id="top">
         <h1>Course Notes</h1>
         <nav>
-            <a href="#form" role="button" class="secondary">Add New Note</a>
+            <a href="create.html" role="button" class="secondary">Add New Note</a>
         </nav>
     </header>
- 
+
     <main class="container">
         <!-- Search and Filters -->
         <section>
@@ -24,8 +24,7 @@
             <div class="filters" style="margin: 1rem 0">
                 <select>
                     <option>All Categories</option>
-                    <option>Mathematics</option>
-                    <option>Information Technology</option>
+                    <!-- Categories will be populated dynamically -->
                 </select>
                 <select>
                     <option>Sort by Date</option>
@@ -33,101 +32,24 @@
                 </select>
             </div>
         </section>
- 
+
         <!-- Notes Grid -->
         <div class="grid">
-            <article>
-                <h3>Software Development Basics</h3>
-                <p>Introduction to HTML and CSS</p>
-                <footer>
-                    <small>CS • Last updated: 2024-12-4</small>
-                    <a href="#detail" role="button" class="outline">View</a>
-                </footer>
-            </article>
-            <!-- Repeat more articles -->
+            <!-- Notes will be loaded dynamically -->
+            <p>Loading notes...</p>
         </div>
- 
+
         <!-- Pagination -->
         <nav>
             <ul style="list-style: none; display: flex; gap: 1rem; justify-content: center">
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#" aria-current="page">3</a></li>
+                <!-- Pagination will be generated dynamically -->
             </ul>
         </nav>
     </main>
- 
-    <!-- Item Creation Form -->
-    <section id="form" class="container">
-        <h2>Create New Note</h2>
-        <form>
-            <label for="title">
-                Title *
-                <input type="text" id="title" name="title" required>
-            </label>
- 
-            <label for="content">
-                Content *
-                <textarea id="content" required></textarea>
-            </label>
- 
-            <label for="category">
-                Category *
-                <select id="category" required>
-                    <option value="">Select category</option>
-                    <option>IS</option>
-                    <option>CS</option>
-                    <option>CE</option>
-                    <option>MATHS</option>
-                </select>
-            </label>
- 
-            <div class="grid">
-                <button type="reset" class="secondary">Clear</button>
-                <button type="submit">Create Note</button>
-            </div>
-        </form>
-    </section>
- 
-    <!-- Item Detail View -->
-    <section id="detail" class="container">
-        <article>
-            <h2>Software development Basics</h2>
-            <p><strong>Category:</strong> CS</p>
-            <p><strong>Created:</strong> 2024-12-4</p>
-            <div class="content">
-                <p>Detailed content about Internet software development</p>
-            </div>
- 
-            <div class="grid">
-                <a href="#top" role="button" class="secondary">Back to List</a>
-                <div>
-                    <button class="submit">Edit</button>
-                    <button class="contrast">Delete</button>
-                </div>
-            </div>
- 
-            <div class="comments-section">
-                <h3>Comments</h3>
-                <div class="comment">
-                    <p>Hello there.</p>
-                    <small>Posted by Hassan • 2023-12-4</small>
-                </div>
-               
-                <form>
-                    <label for="comment">
-                        Add Comment
-                        <textarea id="comment" placeholder="Write your comment..."></textarea>
-                    </label>
-                    <button type="submit">Post Comment</button>
-                </form>
-            </div>
-        </article>
-    </section>
- 
+
     <footer class="container">
-        <small>© ITCS333 project</small>
+        <small>© ITCS333 Project</small>
     </footer>
-     <script src="script.js"></script>
+    <script src="index-script.js"></script>
 </body>
 </html>

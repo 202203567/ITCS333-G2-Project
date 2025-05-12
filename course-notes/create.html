@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-theme='dark'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITCS333 Project - Create New Note</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+</head>
+<body>
+    <header class="container">
+        <h1>Create New Note</h1>
+        <nav>
+            <a href="index.html" role="button" class="secondary">Back to Notes</a>
+        </nav>
+    </header>
+
+    <!-- Item Creation Form -->
+    <section class="container">
+        <form id="create-form">
+            <label for="title">
+                Title *
+                <input type="text" id="title" name="title" required>
+            </label>
+
+            <label for="content">
+                Content *
+                <textarea id="content" required></textarea>
+            </label>
+
+            <label for="category">
+                Category *
+                <select id="category" required>
+                    <option value="">Select category</option>
+                    <!-- Categories will be populated dynamically -->
+                </select>
+            </label>
+
+            <div class="grid">
+                <button type="reset" class="secondary">Clear</button>
+                <button type="submit">Create Note</button>
+            </div>
+        </form>
+    </section>
+
+    <footer class="container">
+        <small>© ITCS333 Project</small>
+    </footer>
+    <script src="create-script.js"></script>
+</body>
+</html>
