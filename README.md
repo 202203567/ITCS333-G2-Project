@@ -1,7 +1,41 @@
-# ITCS333-G2-Project
-| ID | Name | Github Username | Module |
-|----|------|-----------------|--------|
-| 202203567 | MAHMOOD ALTHAWADI | [@202203567](https://github.com/202203567) |  Homepage<br>Events Calendar |
-| 202200820 | HASSAN KOHEJI | [@202200820](https://github.com/202200820) | Course Notes |
-| 202200809 | MOHAMED AL YUSUF | [@Master246jet](https://github.com/Master246jet) | Campus News |
-| 202200178 | ZIYAD ABDULNOOR | [@ziyad131](https://github.com/ziyad131) | Club Activities  |
+# <p align="center">ITCS333-G2-Project</p>
+
+<p align="center">https://replit.com/@malthawadi/ITCS333-G2-Project</center></p>
+
+<p align="center">
+<table align="center">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Github Username</th>
+      <th>Module</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>202203567</td>
+      <td>MAHMOOD ALTHAWADI</td>
+      <td><a href="https://github.com/202203567">@202203567</a></td>
+      <td>Homepage<br>Events Calendar</td>
+    </tr>
+    <tr>
+      <td>202200820</td>
+      <td>HASSAN KOHEJI</td>
+      <td><a href="https://github.com/202200820">@202200820</a></td>
+      <td>Course Notes</td>
+    </tr>
+    <tr>
+      <td>202200809</td>
+      <td>MOHAMED AL YUSUF</td>
+      <td><a href="https://github.com/Master246jet">@Master246jet</a></td>
+      <td>Campus News</td>
+    </tr>
+    <tr>
+      <td>202200178</td>
+      <td>ZIYAD ABDULNOOR</td>
+      <td><a href="https://github.com/ziyad131">@ziyad131</a></td>
+      <td>Club Activities</td>
+    </tr>
+  </tbody>
+</table>
