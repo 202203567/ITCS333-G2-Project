@@ -1,5 +1,3 @@
-<p align="center">https://replit.com/@malthawadi/g2-events-calendar</center></p>
-
 # Event Management API Documentation
 
 This document outlines all available endpoints for the Event Management API.
