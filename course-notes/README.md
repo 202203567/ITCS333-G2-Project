@@ -3,7 +3,7 @@
 This API provides endpoints for managing course notes, comments, and categories. It supports CRUD (Create, Read, Update, Delete) operations for notes and comments.
 
 ## Base URL
-https://92eef556-e4be-48c7-88f5-70d60317f8c2-00-t0vvpa972dyq.pike.replit.dev/API.php
+https://9410da3b-706d-4938-82cd-9c5990694d4e-00-1p2t0tp1gdlq2.pike.replit.dev/course-notes/API.php
 
 ## Authentication
 Currently, the API does not require authentication. However, security headers are implemented to prevent common web vulnerabilities.
