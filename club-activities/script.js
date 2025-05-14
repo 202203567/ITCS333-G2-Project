@@ -24,7 +24,7 @@ const createForm = document.querySelector('#creation-form form');
 const commentForm = document.querySelector('#detail-view form');
 
 // API URLs
-const apiUrl = 'activities-api.php';
+const apiUrl = 'https://9410da3b-706d-4938-82cd-9c5990694d4e-00-1p2t0tp1gdlq2.pike.replit.dev/club-activities/activities-api.php';
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
