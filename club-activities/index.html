@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club Activities Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/picocss/1.5.10/pico.min.css">
+  <style>
+    :root {
+      --primary: #3498db;
+      --primary-hover: #2980b9;
+      --secondary: #fd7e14;
+      --secondary-hover: #e67e22;
+    }
+    
+    [data-theme="dark"] {
+      --background-color: #111827;
+      --card-background-color: #1f2937;
+      --card-border-color: #374151;
+      --color: #f9fafb;
+      --h1-color: #f9fafb;
+      --h2-color: #f3f4f6;
+      --h3-color: #e5e7eb;
+      --h4-color: #d1d5db;
+      --h5-color: #9ca3af;
+      --h6-color: #6b7280;
+      --muted-color: #9ca3af;
+      --muted-border-color: #4b5563;
+    }
+
+    body {
+      background-color: var(--background-color);
+      color: var(--color);
+    }
+
+    header {
+      background-color: var(--card-background-color);
+      color: var(--color);
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--card-border-color);
+    }
+
+    .hero-section {
+      padding: 2rem 1rem;
+      background-color: var(--card-background-color);
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--card-border-color);
+    }
+
+    .search-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-end;
+      margin-bottom: 2rem;
+    }
+
+    .search-controls > div {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .club-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .club-card {
+      background: var(--card-background-color);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+      border: 1px solid var(--card-border-color);
+    }
+
+    .club-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .club-image {
+      height: 160px;
+      background-color: #2d3748;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .club-content {
+      padding: 1rem;
+    }
+
+    .club-badge {
+      background-color: var(--secondary);
+      color: var(--contrast);
+      padding: 0.25rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      display: inline-block;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .pagination button {
+      margin: 0 0.25rem;
+    }
+
+    footer {
+      margin-top: 2rem;
+      padding: 1rem 0;
+      background-color: var(--card-background-color);
+      text-align: center;
+      border-top: 1px solid var(--card-border-color);
+    }
+
+    section {
+      margin-bottom: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--muted-border-color);
+    }
+
+    section:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .section-title {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid var(--primary);
+      display: inline-block;
+    }
+
+    /* Detail view */
+    .club-detail {
+      background: var(--card-background-color);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--card-border-color);
+    }
+
+    .club-actions {
+      display: flex;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .comment {
+      background-color: var(--card-background-color);
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      border: 1px solid var(--card-border-color);
+    }
+
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .comment-author {
+      font-weight: bold;
+    }
+
+    .comment-date {
+      color: var(--muted-color);
+      font-size: 0.85rem;
+    }
+
+    .loading, .error-message, .no-results {
+      padding: 2rem;
+      text-align: center;
+      width: 100%;
+      background: var(--card-background-color);
+      border-radius: 8px;
+      margin: 1rem 0;
+      border: 1px solid var(--card-border-color);
+    }
+    
+    .error-message {
+      background-color: rgba(220, 38, 38, 0.2);
+      color: #ef4444;
+      border-color: #ef4444;
+    }
+    
+    input[aria-invalid="true"], 
+    select[aria-invalid="true"], 
+    textarea[aria-invalid="true"] {
+      border-color: #ef4444 !important;
+    }
+
+    @media (max-width: 768px) {
+      .club-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .search-controls {
+        flex-direction: column;
+      }
+      
+      .search-controls > div {
+        width: 100%;
+      }
+      
+      .club-actions {
+        flex-direction: column;
+      }
+    }
+
+    /* Custom scrollbar for dark mode */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--card-background-color);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--muted-border-color);
+      border-radius: 6px;
+      border: 3px solid var(--card-background-color);
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: var(--muted-color);
+    }/* Detail view improvements */
+.activity-header {
+  background-color: var(--background-color);
+  padding: 2rem;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid var(--card-border-color);
+  border-bottom: none;
+  position: relative;
+  z-index: 1;
+}
+
+.activity-header h2 {
+  font-size: 2.2rem;
+  margin-bottom: 0.75rem;
+  color: var(--h1-color);
+}
+
+.activity-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.club-detail {
+  border-radius: 0 0 8px 8px;
+  padding: 2rem;
+  margin-top: -1px;
+}
+
+.club-detail img {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.grid {
+  margin: 2rem 0;
+}
+
+.club-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2rem 0 0;
+}
+
+.club-actions > button,
+.club-actions > a {
+  min-width: 160px;
+}
+
+.comment {
+  background-color: var(--card-background-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--card-border-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comment:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--muted-border-color);
+}
+
+.comment-author {
+  font-weight: bold;
+  color: var(--h4-color);
+}
+
+.comment-date {
+  color: var(--muted-color);
+  font-size: 0.85rem;
+}
+
+/* Creation/Edit form improvements */
+#creation-form .section-title {
+  transition: color 0.3s ease;
+}
+
+#creation-form form {
+  padding: 2rem;
+  background: var(--card-background-color);
+  border-radius: 8px;
+  border: 1px solid var(--card-border-color);
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .club-actions {
+    flex-direction: column;
+  }
+  
+  .club-actions > button,
+  .club-actions > a {
+    width: 100%;
+  }
+  
+  .activity-header,
+  .club-detail {
+    padding: 1.5rem;
+  }
+  
+  .activity-header h2 {
+    font-size: 1.8rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <ul>
+        <li><strong>Campus Club Hub</strong></li>
+      </ul>
+      <ul>
+        <li><a href="#listing-page">Activities</a></li>
+        <li><a href="#creation-form">Create</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Listing Page View -->
+    <section id="listing-page">
+      <h1 class="section-title">Club Activities</h1>
+      
+      <div class="hero-section">
+        <h2>Discover Campus Activities</h2>
+        <p>Find and join exciting club activities on campus. Filter by category, search for specific interests, and find the perfect club for you!</p>
+      </div>
+
+      <div class="search-controls">
+        <div>
+          <label for="search">Search activities</label>
+          <input type="search" id="search" name="search" placeholder="Enter keywords...">
+        </div>
+        <div>
+          <label for="category">Category</label>
+          <select id="category" name="category">
+            <option value="">All Categories</option>
+            <option value="Academic">Academic</option>
+            <option value="Sports">Sports</option>
+            <option value="Arts">Arts & Culture</option>
+            <option value="Social">Social</option>
+            <option value="Service">Community Service</option>
+            <option value="Competition">Competition</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Team">Team</option>
+            <option value="Technology">Technology</option>
+            <option value="Community">Community</option>
+          </select>
+        </div>
+        <div>
+          <label for="sort">Sort by</label>
+          <select id="sort" name="sort">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="name-asc">Name A-Z</option>
+            <option value="name-desc">Name Z-A</option>
+          </select>
+        </div>
+        <div>
+          <a href="#creation-form" role="button" class="secondary">Add New Activity</a>
+        </div>
+      </div>
+
+      <div class="club-grid">
+        <!-- Activity cards will be loaded here -->
+      </div>
+
+      <nav class="pagination" aria-label="Pagination">
+        <!-- Pagination will be generated here -->
+      </nav>
+    </section>
+
+    <!-- Creation Form View -->
+    <section id="creation-form">
+      <h1 class="section-title">Create New Club Activity</h1>
+      
+      <form>
+        <div class="grid">
+          <label for="activity-name">
+            Activity Name
+            <input type="text" id="activity-name" name="activity-name" placeholder="Enter activity name" required>
+          </label>
+          
+          <label for="activity-date">
+            Date
+            <input type="date" id="activity-date" name="activity-date" required>
+          </label>
+        </div>
+        
+        <label for="activity-club">
+          Hosting Club
+          <select id="activity-club" name="activity-club" required>
+            <option value="">Select club</option>
+            <!-- Clubs will be loaded here -->
+          </select>
+        </label>
+        
+        <div class="grid">
+          <label for="activity-time">
+            Time
+            <input type="time" id="activity-time" name="activity-time" required>
+          </label>
+          
+          <label for="activity-location">
+            Location
+            <input type="text" id="activity-location" name="activity-location" placeholder="Building and room number" required>
+          </label>
+        </div>
+        
+        <label for="activity-category">Category</label>
+        <div class="grid">
+          <label for="category-academic">
+            <input type="checkbox" id="category-academic" name="category[]" value="1">
+            Academic
+          </label>
+          <label for="category-sports">
+            <input type="checkbox" id="category-sports" name="category[]" value="2">
+            Sports
+          </label>
+          <label for="category-arts">
+            <input type="checkbox" id="category-arts" name="category[]" value="3">
+            Arts & Culture
+          </label>
+          <label for="category-social">
+            <input type="checkbox" id="category-social" name="category[]" value="4">
+            Social
+          </label>
+          <label for="category-service">
+            <input type="checkbox" id="category-service" name="category[]" value="5">
+            Community Service
+          </label>
+          <label for="category-competition">
+            <input type="checkbox" id="category-competition" name="category[]" value="6">
+            Competition
+          </label>
+          <label for="category-workshop">
+            <input type="checkbox" id="category-workshop" name="category[]" value="7">
+            Workshop
+          </label>
+          <label for="category-team">
+            <input type="checkbox" id="category-team" name="category[]" value="8">
+            Team
+          </label>
+          <label for="category-technology">
+            <input type="checkbox" id="category-technology" name="category[]" value="9">
+            Technology
+          </label>
+          <label for="category-community">
+            <input type="checkbox" id="category-community" name="category[]" value="10">
+            Community
+          </label>
+        </div>
+        
+        <label for="activity-description">
+          Description
+          <textarea id="activity-description" name="activity-description" placeholder="Provide details about this activity..." required rows="4"></textarea>
+        </label>
+        
+        <label for="activity-capacity">
+          Maximum Capacity
+          <input type="number" id="activity-capacity" name="activity-capacity" min="1" placeholder="Enter maximum number of participants">
+        </label>
+        
+        <label for="activity-contact">
+          Contact Email
+          <input type="email" id="activity-contact" name="activity-contact" placeholder="Enter contact email" required>
+        </label>
+        
+        <div class="grid">
+          <a href="#listing-page" role="button" class="secondary">Cancel</a>
+          <button type="submit">Create Activity</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Detail View -->
+    <section id="detail-view">
+      <h1 class="section-title">Activity Details</h1>
+      
+      <article class="club-detail">
+        <!-- Activity details will be loaded here -->
+      </article>
+      
+      <h2>Comments</h2>
+      <div class="comments-section">
+        <!-- Comments will be loaded here -->
+      </div>
+      
+      <form>
+        <label for="comment">Add a comment</label>
+        <textarea id="comment" name="comment" placeholder="Write your comment here..." required></textarea>
+        <button type="submit">Post Comment</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Campus Club Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  
+</body>
+</html>
