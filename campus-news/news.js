@@ -11,13 +11,22 @@ let newsData = [];
 let currentPage = 1;
 const itemsPerPage = 2; // 2 news per page for demo
 
-// Fetch news from local JSON file
+// Fetch news from API
 async function fetchNews() {
   try {
     showLoading();
-    const response = await fetch('news-data.json');
+    const searchParams = new URLSearchParams({
+      page: currentPage,
+      limit: itemsPerPage,
+      category: categorySelect.value || '',
+      dateRange: dateRangeSelect.value || ''
+    });
+
+    const url = `/news.php?${searchParams}`;
+    console.log("Fetching URL:", url);
+    const response = await fetch(url);
     if (!response.ok) {
-      throw new Error('Failed to fetch news.');
+      throw new Error(`Failed to fetch news. Status: ${response.status}`);
     }
     const data = await response.json();
     newsData = data;
@@ -28,6 +37,7 @@ async function fetchNews() {
     hideLoading();
   }
 }
+
 
 // Render news
 function renderNews() {
